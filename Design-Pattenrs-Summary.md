@@ -32,8 +32,8 @@ class Haystack {
 
 ## Characteristics of Good Design Patterns
 
-**Solves the problem well**: Aligns with the problem domain and makes it easier to express the solution.
-**Familiar and usable**: Other developers can quickly understand and use it.
+- **Solves the problem well**: Aligns with the problem domain and makes it easier to express the solution.
+- **Familiar and usable**: Other developers can quickly understand and use it.
 
 ## Hierarchical Patterns
 
@@ -41,12 +41,12 @@ Patterns can exist on both micro (small functions or components) and macro level
 
 ### For example:
 
-**Micro level**: Writing utility functions or modules using patterns.
-**Macro level**: Architectures like Model-View-Controller (MVC) for organizing entire applications.
+- **Micro level**: Writing utility functions or modules using patterns.
+- **Macro level**: Architectures like Model-View-Controller (MVC) for organizing entire applications.
 
 ## Familiarity and Maintainability
 
--Familiar design patterns allow for easy understanding and extension of code. A well-structured directory, like having an app/, models/, and utils/ folder, is also a pattern that enhances maintainability.
+- Familiar design patterns allow for easy understanding and extension of code. A well-structured directory, like having an app/, models/, and utils/ folder, is also a pattern that enhances maintainability.
 
 ```js
 // Conventional module pattern
@@ -63,7 +63,7 @@ module.exports = logger;
 
 ## Popular JavaScript Design Patterns
 
-**Modular design**: Separating code into reusable modules.
+- **Modular design**: Separating code into reusable modules.
 ```js
 const myModule = (function () {
     let privateVar = "secret";
@@ -75,7 +75,7 @@ const myModule = (function () {
 })();
 ```
 
-**Factory pattern**: Creating objects without specifying the exact class of object that will be created.
+- **Factory pattern**: Creating objects without specifying the exact class of object that will be created.
 
 ```js
 function CarFactory(type) {
@@ -87,13 +87,13 @@ function CarFactory(type) {
 
 - Effective design requires selecting the right pattern for the given context. Patterns should improve:
 
-**Reliability**: Reduces complexity, makes logic easy to follow.
-**Efficiency**: Streamlines code structure, minimizes time spent on organization.
-**Maintainability**: Adaptable to future changes or bug fixes.
-**Usability**: Easy to understand and integrate by other developers.
+- **Reliability**: Reduces complexity, makes logic easy to follow.
+- **Efficiency**: Streamlines code structure, minimizes time spent on organization.
+- **Maintainability**: Adaptable to future changes or bug fixes.
+- **Usability**: Easy to understand and integrate by other developers.
 
 ## Beware of Bad Patterns
-**Cargo culting**: Avoid copying patterns without understanding their purpose or context.
+- **Cargo culting**: Avoid copying patterns without understanding their purpose or context.
 </details>
 
 <details>
