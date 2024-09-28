@@ -522,7 +522,6 @@ Accounts.allAccounts; // => []
 - Static methods can also be added after the class has been defined:
 
 ```javascript
-Копировать код
 Accounts.countAccounts = () => {
     return Accounts.allAccounts.length;
 };
