@@ -124,6 +124,11 @@ This concept has its roots in the early **MVC (Model-View-Controller)** pattern,
 2. **View**: Handles the presentation of data to the user. It interacts with the controller when user actions occur.
 3. **Controller**: Acts as the intermediary between the model and the view, updating the model based on user actions and ensuring the view reflects the latest data.
 
+</details>
+
+<details>
+  <summary>A Working Example of MVC</summary>
+  
 #### MVC Example: Mutable Number Application
 
 ```js
@@ -197,7 +202,7 @@ const controller = new MutableNumberController(model, view);
 document.body.appendChild(view.renderInitial());
 ```
 
-- **In this example, the Model holds the data and updates it, while the View renders the updated data to the user. The Controller mediates between the two, responding to user actions (like clicking a button) and triggering updates in both the model and the view**.
+- In this example, the Model holds the data and updates it, while the View renders the updated data to the user. The Controller mediates between the two, responding to user actions (like clicking a button) and triggering updates in both the model and the view**.
 
 ### Why Separation Matters
 
@@ -210,69 +215,320 @@ This separation helps developers understand where to add features or fix bugs, r
 </details>
 
 <details>
-  <summary>A Working Example of MVC</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
   <summary>MVVM</summary>
   
-  - Summary to be added...
+### Overview:
+- **MVVM (Model-View-ViewModel)** is a design pattern similar to MVC, focusing on a clear separation between business logic, data, and UI rendering.
+- It is commonly used in front-end development due to its ability to handle constantly updated views.
+
+### MVVM Structure:
+1. **Model**:
+   - Represents the data and business logic.
+   - Any changes in the Model will trigger updates in the View through data binding.
+   
+2. **View**:
+   - Describes how the data is presented (structure, layout, and appearance).
+   - Interacts with the **ViewModel** via a **Data Binding** mechanism.
+
+3. **ViewModel**:
+   - Acts as the intermediary between Model and View.
+   - Facilitates communication through data binding.
+   - Listens for changes in the Model and updates the View accordingly.
+
+### Key Features:
+- **Data Binding**: The core mechanism that synchronizes the Model and View. Changes in the Model reflect in the View, and user interactions in the View can update the Model.
+- **Constant View Updates**: MVVM is well-suited for applications where the view must frequently change based on data mutations.
+
+### Example in JavaScript Frameworks:
+- **Angular**:
+  - Utilizes **ng-model** for two-way data binding.
+  - Example: `<input ng-model="dataModel">` allows changes in the Model to automatically update the input field and vice versa.
+
+### Comparison with MVC:
+- **MVVM** is more suitable for front-end applications with dynamic views.
+- **MVC** is often preferred on the back-end due to its simpler, render-once nature.
 </details>
 
 <details>
   <summary>MV* and the Nature of Software</summary>
   
-  - Summary to be added...
+### Overview:
+- **MV* (MVC, MVVM, and their variations)** are foundational patterns that JavaScript developers frequently encounter.
+- These patterns revolve around the fundamental aspects of software: **input**, **processing**, and **output** of data.
+
+### Key Concepts:
+- **Input**: Data enters the system (e.g., user actions).
+- **Processing**: Business logic handles and mutates the data.
+- **Output**: The processed data is rendered or displayed to the user.
+
+### Commonality of MV* Patterns:
+- Variations of MVC and MVVM consistently arise due to their flexibility and clear separation of concerns.
+- These patterns guide developers in structuring software systems to separate **data logic** from **presentation** effectively.
+
+### Conclusion:
+- Regardless of how systems are architected, most solutions will adopt principles similar to MVC or MVVM, organizing the code to manage the flow of data, its processing, and how it is presented.
+
 </details>
 
 <details>
   <summary>JavaScript Modules</summary>
   
-  - Summary to be added...
+# JavaScript Modules
+
+### Overview:
+- **Modules** in JavaScript used to refer to distinct, self-contained pieces of code within a file.
+- **Modern Modules** follow the ECMAScript specification, where modules are separate files that can be imported and exported.
+
+### Key Concepts:
+1. **Exporting**:
+   - Default export: `export default [item]` allows import with any local name.
+   - Named export: `export { item as alias }` requires specifying the exact name when importing.
+   - Example:
+     ```javascript
+     // Exporting in DropdownComponent.js
+     export default DropdownComponent;
+     ```
+
+2. **Importing**:
+   - Import default: 
+     ```javascript
+     import MyDropdown from './DropdownComponent.js';
+     ```
+   - Import named: 
+     ```javascript
+     import { MyClass as TheClass } from './things.js';
+     ```
+
+3. **Aggregating Exports**:
+   - Group multiple exports into an `index.js` file for convenience:
+     ```javascript
+     // components/index.js
+     export { default as DropdownComponent } from './DropdownComponent.js';
+     export { default as AccordianComponent } from './AccordianComponent.js';
+     ```
+
+4. **Usage**:
+   - Import everything from a file:
+     ```javascript
+     import * from 'components/index.js';
+     ```
+
+### Notes:
+- **In Browsers**: Use `<script type="module">` for module support.
+- **In Node.js**: Use `.mjs` extension or `--experimental-modules` flag for ES Modules.
+
 </details>
 
 <details>
   <summary>Modular Design Patterns</summary>
   
-  - Summary to be added...
+
+### Definition
+- **Modular Design Patterns** refer to structures and conventions used to create individual JavaScript modules, each serving a specific abstraction.
+
+### Key Principles
+- **Single Responsibility**: Each module (file) should export a distinct abstraction.
+- **File Structure**: Organize your directory and file structure to reflect the different abstractions clearly.
+
+### Best Practices
+- **Separation of Concerns**: Avoid cramming multiple abstractions into a single file. 
+- If you find yourself repeating patterns within the same file, consider splitting them into separate modules for better clarity and maintainability.
+
 </details>
 
 <details>
   <summary>Constructor Patterns</summary>
   
-  - Summary to be added...
+### Definition
+- The **Constructor pattern** involves using a constructor function to create objects and manually assigning methods to the prototype. It mimics classical OOP behavior in JavaScript.
+
+### Key Concepts
+1. **Constructor Function**:  
+   - The object is created via a function, typically in the form of a function declaration:
+     ```js
+     function Book(title) {
+       this.title = title;
+     }
+     ```
+   
+2. **Assigning to Prototype**:  
+   - Methods are added to the prototype individually:
+     ```js
+     Book.prototype.getNumberOfPages = function() { /* ... */ };
+     ```
+   - Alternatively, the entire prototype is replaced with an object literal for cleaner code:
+     ```js
+     Book.prototype = {
+       getNumberOfPages() { /* ... */ },
+       renderFrontCover() { /* ... */ },
+       renderBackCover() { /* ... */ }
+     };
+     ```
+
+3. **Instantiation**:  
+   - The `new` keyword is used to create a new instance:
+     ```js
+     const myBook = new Book('JavaScript Guide');
+     ```
+
+### Best Practice
+- The second approach (replacing the prototype with an object literal) is preferred for its encapsulation and conciseness.
+
+### Important Note
+- This pattern was more common before the introduction of the `class` syntax in JavaScript.
 </details>
 
 <details>
   <summary>When to Use the Constructor Pattern</summary>
   
-  - Summary to be added...
+### Applicability
+The **Constructor pattern** is suitable when you want to encapsulate a concept that:
+- Is expressible as a noun (e.g., `NavigationComponent`, `StorageDevice`).
+- Requires construction (you want to create instances).
+- May vary between instances.
+
+If the concept doesn’t fit these criteria (like a utility module with static methods), consider using another design pattern.
+
+### Decline of Usage
+The Constructor pattern is less favored since the introduction of the **class syntax** in JavaScript, which aligns more closely with traditional OOP languages.
+
 </details>
 
 <details>
   <summary>Inheritance with the Constructor Pattern</summary>
-  
-  - Summary to be added...
+# Inheritance with the Constructor Pattern
+
+### Basic Structure
+To implement inheritance using the Constructor pattern, set up prototypes to create a prototypal tree. For example:
+
+```js
+function Animal() {}
+Animal.prototype = {
+  isAnimal: true,
+  grow() {}
+};
+
+function Monkey() {}
+Monkey.prototype = Object.create(Animal.prototype);
+Monkey.prototype.isMonkey = true;
+Monkey.prototype.screech = function() {};
+```
+- **Instantiation**
+Instances of Monkey can access their own methods and those inherited from Animal:
+
+```js
+const monkey = new Monkey();
+console.log(monkey.isAnimal); // true
+console.log(monkey.isMonkey); // true
+console.log(typeof monkey.grow); // "function"
+console.log(typeof monkey.screech); // "function"
+```
+
+-**Bulk Assignment**
+
+Instead of adding methods individually, you can use Object.assign() for a cleaner approach:
+
+```js
+Monkey.prototype = Object.assign(Object.create(Animal.prototype), {
+  isMonkey: true,
+  screech() {},
+  groom() {}
+});
+```
 </details>
 
 <details>
   <summary>The Class Pattern</summary>
   
-  - Summary to be added...
+### Overview
+The **Class pattern** is a modern approach in JavaScript, replacing the older Constructor pattern. It utilizes class definition syntax, making the language more expressive while still relying on the same prototypal mechanisms.
+
+### Basic Structure
+A class is defined using the `class` keyword. Here’s an example of a simple class representing a name:
+
+```js
+class Name {
+  constructor(forename, surname) {
+    this.forename = forename;
+    this.surname = surname;
+  }
+  
+  sayHello() {
+    return `My name is ${this.forename} ${this.surname}`;
+  }
+}
+```
+-**Equivalent Constructor Function**
+
+The class above can be translated into a traditional constructor function as follows:
+
+```js
+function Name(forename, surname) {
+  this.forename = forename;
+  this.surname = surname;
+}
+
+Name.prototype.sayHello = function() {
+  return `My name is ${this.forename} ${this.surname}`;
+};
+```
+
+- **Key Takeaway**
+While the Class pattern offers a cleaner syntax, it functions similarly to the Constructor pattern. Both methods utilize the same underlying prototype system, so understanding the prototypal mechanism is still essential.
 </details>
 
 <details>
   <summary>When to Use the Class Pattern</summary>
   
-  - Summary to be added...
+### Appropriate Scenarios
+The **Class pattern** is best utilized when:
+
+1. **The concept is expressible as a noun:** It represents a distinct entity.
+2. **The concept requires construction:** It needs to be instantiated to function.
+3. **The concept will vary between instances:** Each instance should have unique properties.
+
+### Examples of Suitable Concepts
+- **Database Record:** Represents a piece of data, allowing for inquiry and manipulation.
+- **Todo Item Component:** Represents a todo item, enabling it to be rendered.
+- **Binary Tree:** Represents a binary-tree data structure.
+
+### Evaluation Tips
+If you're unsure whether to use the Class pattern, try writing some consumer code (pseudo code) that utilizes your abstraction. If it feels logical and easy to use, then the Class pattern is likely appropriate.
+
 </details>
 
 <details>
   <summary>Static Methods</summary>
   
-  - Summary to be added...
+### Definition
+**Static methods and properties** are defined using the `static` keyword within a class. They are associated with the class itself rather than with instances of the class.
+
+### Example
+```javascript
+class Accounts {
+    static allAccounts = [];
+    
+    static tallyAllAccounts() {
+        // ...
+    }
+}
+
+// Usage
+Accounts.tallyAllAccounts();
+Accounts.allAccounts; // => []
+```
+## Adding Static Methods After Definition
+
+- Static methods can also be added after the class has been defined:
+
+```javascript
+Копировать код
+Accounts.countAccounts = () => {
+    return Accounts.allAccounts.length;
+};
+```
+-**Purpose**
+- Static methods and properties are useful when the functionality or property pertains to the class as a whole rather than to any individual instance.
 </details>
 
 <details>
