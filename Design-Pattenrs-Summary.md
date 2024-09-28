@@ -776,7 +776,7 @@ const numericalInputComponent = Object.assign(inputComponent.extend(), {
     }
 });
 ```
-Note: Use call() to reference and invoke the parent method, as super cannot be used in this context.
+**Note**: Use call() to reference and invoke the parent method, as super cannot be used in this context.
 -**Naming Confusion**
 The Prototype pattern may be better referred to as the Object Extension Pattern or No-Constructor Approach to Prototypal Inheritance, as it is less commonly used compared to classical OOP patterns.
 </details>
