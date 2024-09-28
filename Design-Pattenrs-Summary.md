@@ -532,32 +532,253 @@ Accounts.countAccounts = () => {
 
 <details>
   <summary>Public and Private Fields</summary>
-  
-  - Summary to be added...
+  ## Public Fields
+- Public fields (properties) can be declared directly within the class definition:
+    ```javascript
+    class Rectangle {
+        width = 100;
+        height = 100;
+    }
+    ```
+- These fields are initialized for each instance and are mutable. They are useful for setting sensible defaults, which can be overridden in the constructor:
+    ```javascript
+    class Rectangle {
+        width = 100;
+        height = 100;
+
+        constructor(width, height) {
+            if (width && !isNaN(width)) {
+                this.width = width;
+            }
+            if (height && !isNaN(height)) {
+                this.height = height;
+            }
+        }
+    }
+    ```
+
+## Private Fields
+- Private fields are declared with a `#` prefix:
+    ```javascript
+    class Rectangle {
+        #width = 100;
+        #height = 100;
+
+        constructor(width, height) {
+            if (width && !isNaN(width)) {
+                this.#width = width;
+            }
+            if (height && !isNaN(height)) {
+                this.#height = height;
+            }
+        }
+    }
+    ```
+- Private fields are only accessible within the class itself. Sub-classes do not have access:
+    ```javascript
+    class Super {
+        #private = 123;
+    }
+
+    class Sub {
+        getPrivate() {
+            return this.#private; // SyntaxError: Undefined private field
+        }
+    }
+    ```
+
+## Considerations
+- JavaScript traditionally did not support private fields; programmers would use underscores (e.g., `_someProperty`) as a convention to indicate private properties.
+- Use private fields cautiously, as they can limit code extensibility. Consider using pseudo-private fields with underscores if you want to allow some degree of access for extending classes.
 </details>
 
 <details>
   <summary>Extending Classes</summary>
   
-  - Summary to be added...
+## Inheritance
+- Inheritance is achieved using the `class ... extends` syntax:
+    ```javascript
+    class Animal {}
+    class Tiger extends Animal {}
+    ```
+- This syntax ensures that:
+    - Each instance of `Tiger` has a `[[Prototype]]` that points to `Tiger.prototype`.
+    - `Tiger.prototype` inherits from `Animal.prototype`.
+
+## Prototype Chain Confirmation
+- You can confirm the prototype chain using:
+    ```javascript
+    Object.getPrototypeOf(new Tiger()) === Tiger.prototype; // true
+    Object.getPrototypeOf(Tiger.prototype) === Animal.prototype; // true
+    ```
+- This verifies the inheritance structure:
+    - `new Tiger()` instances inherit from `Tiger.prototype`.
+    - `Tiger.prototype` inherits from `Animal.prototype`.
+      
 </details>
 
 <details>
   <summary>Mixing-in Classes</summary>
   
-  - Summary to be added...
+## Overview
+- JavaScript lacks a native mixing-in mechanism, so mixing in methods can be achieved through:
+  - Augmenting the prototype after class definition.
+  - Inheriting from mixins as if they were superclasses.
+
+## Augmenting Prototype
+- You can augment a class's prototype using `Object.assign`:
+    ```javascript
+    const fooMixin = { foo() {} };
+    const bazMixin = { baz() {} };
+    class MyClass {}
+    Object.assign(MyClass.prototype, fooMixin, bazMixin);
+    ```
+- **Limitation**: This method does not allow the class to override mixin methods:
+    ```javascript
+    class MyClass { foo() {} }
+    Object.assign(MyClass.prototype, fooMixin, bazMixin);
+    new MyClass().foo === fooMixin.foo; // true (not ideal)
+    ```
+
+## Inheritance for Mixing-in
+- A better approach involves using subclass factories, which return a class extending a specified superclass:
+    ```javascript
+    const greetingsMixin = Super => class extends Super {
+        hello() { return 'hello'; }
+        hi() { return 'hi'; }
+        heya() { return 'heya'; }
+    };
+    class Human {}
+    class Programmer extends greetingsMixin(Human) {}
+    new Programmer().hi(); // => "hi"
+    ```
+
+## Combining Multiple Mixins
+- Implement a helper function to combine multiple subclass factories:
+    ```javascript
+    function mixin(...mixins) {
+        return mixins.reduce((base, mixin) => {
+            return mixin(base);
+        }, Object);
+    }
+    ```
+- **Usage**:
+    ```javascript
+    const alpha = Super => class extends Super { alphaMethod() {} };
+    const bravo = Super => class extends Super { braveMethod() {} };
+    class MyClass extends mixin(alpha, bravo) {
+        myMethod() {}
+    }
+    ```
+- **Result**: Instances of `MyClass` will have access to:
+    - `myMethod` from `MyClass`.
+    - `alphaMethod` from `alpha`.
+    - `braveMethod` from `bravo`.
+
+## Conclusion
+- Mixing in methods can be tricky. Consider using libraries or established patterns to manage mixins effectively.
+- Two approaches discussed:
+  - Using `Object.assign()` to compose methods into a single prototype.
+  - Creating an inheritance tree for a mixin hierarchy.
 </details>
 
 <details>
   <summary>Accessing a Super-Class</summary>
   
-  - Summary to be added...
+## Overview
+- In classes defined using method definition syntax, the `super` binding provides access to the superclass and its properties.
+
+## Calling the Super-Class Constructor
+- The `super()` function calls the constructor of the superclass. If you define a constructor in a derived class, you **must** call `super()` before accessing or modifying `this`.
+
+### Example:
+```javascript
+class Tiger extends Animal {
+    constructor() {
+        super(); // Call Animal's constructor
+    }
+}
+```
+
+- **Important Restrictions** 
+Attempting to call super() after modifying the instance, or not calling it at all, will result in a ReferenceError:
+```
+javascript
+class Tiger extends Animal {
+    constructor() {
+        this.someProperty = 123; // Error occurs here
+        super();
+    }
+}
+new Tiger();
+// ! ReferenceError: You must call the super constructor in a derived class before accessing 'this' or returning from the derived constructor
+```
+- **Additional Information** 
+T
+he super binding and its peculiarities are discussed in more detail in Chapter 6, Primitives and Built-in Types (Function bindings section).
+
 </details>
 
 <details>
   <summary>The Prototype Pattern</summary>
   
-  - Summary to be added...
+## Overview
+- The Prototype pattern uses plain objects as templates for other objects, allowing for direct extension without instantiation via `new` or `Constructor.prototype`.
+
+## Creating a Template
+- Begin by creating a template object that contains all methods and properties related to your abstraction.
+  
+### Example Template:
+```javascript
+const inputComponent = {
+    name: 'Input Component',
+    render() {
+        return document.createElement('input');
+    }
+};
+``` 
+-**Convention**: Template objects start with a lowercase letter; constructor functions start with an uppercase letter.
+## Instantiating Objects
+Create specific instances using Object.create():
+```
+javascript
+const inputA = Object.create(inputComponent);
+const inputB = Object.create(inputComponent);
+```
+
+This sets the new object's internal [[Prototype]] to the template, allowing property access from the prototype.
+
+-**Accessing Methods**:
+
+```javascript
+inputA.render(); // Calls the render method from inputComponent
+Simplifying Object Creation
+Introduce a method to the template for creating instances:
+
+```javascript
+inputComponent.extend = function() {
+    return Object.create(this);
+};
+```
+-**Create instances with less code**:
+```javascript
+const inputA = inputComponent.extend();
+const inputB = inputComponent.extend();
+```
+-**Extending the Template**
+To create new types of inputs, extend the template:
+```javascript
+const numericalInputComponent = Object.assign(inputComponent.extend(), {
+    render() {
+        const input = inputComponent.render.call(this);
+        input.type = 'number';
+        return input;
+    }
+});
+```
+Note: Use call() to reference and invoke the parent method, as super cannot be used in this context.
+-**Naming Confusion**
+The Prototype pattern may be better referred to as the Object Extension Pattern or No-Constructor Approach to Prototypal Inheritance, as it is less commonly used compared to classical OOP patterns.
 </details>
 
 <details>
