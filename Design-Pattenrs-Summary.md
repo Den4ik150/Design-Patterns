@@ -9,164 +9,33 @@ This repository provides a concise summary of Design Patterns in JavaScript. It 
 
 ### Design Patterns
 
-<details>
-  <summary>The Perspective of a Designer</summary>
-  
-  - Summary to be added...
-</details>
+## Table of Contents
 
-<details>
-  <summary>Architectural Design Patterns</summary>
-  
-  - Summary to be added...
-</details>
+- [The Perspective of a Designer](#the-perspective-of-a-designer)
+- [Architectural Design Patterns](#architectural-design-patterns)
+  - [MVC](#mvc)
+  - [A Working Example of MVC](#a-working-example-of-mvc)
+  - [MVVM](#mvvm)
+  - [MV* and the Nature of Software](#mv-and-the-nature-of-software)
+- [JavaScript Modules](#javascript-modules)
+  - [Modular Design Patterns](#modular-design-patterns)
+- [Constructor Patterns](#constructor-patterns)
+  - [When to Use the Constructor Pattern](#when-to-use-the-constructor-pattern)
+  - [Inheritance with the Constructor Pattern](#inheritance-with-the-constructor-pattern)
+- [The Class Pattern](#the-class-pattern)
+  - [When to Use the Class Pattern](#when-to-use-the-class-pattern)
+  - [Static Methods](#static-methods)
+  - [Public and Private Fields](#public-and-private-fields)
+  - [Extending Classes](#extending-classes)
+  - [Mixing-in Classes](#mixing-in-classes)
+  - [Accessing a Super-Class](#accessing-a-super-class)
+- [The Prototype Pattern](#the-prototype-pattern)
+  - [When to Use the Prototype Pattern](#when-to-use-the-prototype-pattern)
+- [The Revealing Module Pattern](#the-revealing-module-pattern)
+- [The Conventional Module Pattern](#the-conventional-module-pattern)
+  - [When to Use the Conventional Module Pattern](#when-to-use-the-conventional-module-pattern)
+- [The Singleton Class Pattern](#the-singleton-class-pattern)
+  - [When to Use the Singleton Class Pattern](#when-to-use-the-singleton-class-pattern)
+- [Planning and Harmony](#planning-and-harmony)
+- [Summary](#summary)
 
-<details>
-  <summary>MVC</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>A Working Example of MVC</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>MVVM</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>MV* and the Nature of Software</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>JavaScript Modules</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Modular Design Patterns</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Constructor Patterns</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>When to Use the Constructor Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Inheritance with the Constructor Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>The Class Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>When to Use the Class Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Static Methods</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Public and Private Fields</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Extending Classes</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Mixing-in Classes</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Accessing a Super-Class</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>The Prototype Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>When to Use the Prototype Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>The Revealing Module Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>The Conventional Module Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>When to Use the Conventional Module Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>The Singleton Class Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>When to Use the Singleton Class Pattern</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Planning and Harmony</summary>
-  
-  - Summary to be added...
-</details>
-
-<details>
-  <summary>Summary</summary>
-  
-  - Summary to be added...
-</details>
